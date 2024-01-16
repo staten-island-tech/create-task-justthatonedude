@@ -7,8 +7,9 @@ const DOMSelectors = {
 async function apiCall(URL){
         const userInput = DOMSelectors.searchQuery.value
         const unixTime = Date.now();
-        const response = await fetch(URL + userInput + "&begin=" + unixTime.toString + "&end=" + toString(unixTime));
-        const result = await response.json();
+        const beginningTime = Date.now() - 60000
+        const response = await fetch(URL + `${userInput}&begin=${beginningTime}&end=${unixTime}`);
+        const result = await response.text();
         console.log(result)
         
 }
