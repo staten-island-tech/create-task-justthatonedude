@@ -1,4 +1,4 @@
-let arr = [];
+
 const DOMSelectors = {
     container: document.querySelector(".container"),
     searchQuery: document.querySelector("#search"),
@@ -12,8 +12,21 @@ async function apiCall(){
             mode: "cors"
         });
         const result = await response.json();
-        arr.push(result)
-        cardInsert(arr)
+        const data = result.states
+        cardInsert(data)
+        function cardInsert(array){
+            let i = 0
+            let arraylen = array.length
+            for(i = 0; i < arraylen; i++){
+                if (array != null){
+                    console.log(array[i])
+                    DOMSelectors.container.insertAdjacentHTML(
+                        "afterbegin", 
+                        `<p class=output>${array}</p>`
+                    )
+                }
+            }
+        }
 }
 
 DOMSelectors.form.addEventListener("submit", function(event){
@@ -21,15 +34,3 @@ DOMSelectors.form.addEventListener("submit", function(event){
     apiCall()
 })
 
-function cardInsert(array){
-    let i = 0
-    let arraylen = array.length
-    for(i = 0; i <= arraylen; i++){
-        if (array != null){
-            DOMSelectors.container.insertAdjacentHTML(
-                "afterbegin",
-                
-            )
-        }
-    }
-}
