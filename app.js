@@ -8,7 +8,7 @@ const DOMSelectors = {
 async function apiCall(){
         const userInput = DOMSelectors.searchQuery.value
         const unixTime = Date.now() / 1000
-        const URL = `https://opensky-network.org/api/states/all?time=${Math.round(unixTime)}&icao24=${userInput}`
+        const URL = `https://opensky-network.org/api/states/all?time=${unixTime}&icao24=${userInput}`
         const response = await fetch(URL,{
             mode: "cors"
         });
@@ -21,8 +21,10 @@ async function apiCall(){
             for(i = 0; i < arraylen; i++){
                 if (array != null){
                     console.log(array[i])
-                    DOMSelectors.container.innerHTML = `<p class=output>${array[i]}</p>`
-
+                    DOMSelectors.container.insertAdjacentHTML(
+                        "afterbegin", 
+                        `<p class=output>${array[i]}</p>`
+                    )
                 }
             }
         }
