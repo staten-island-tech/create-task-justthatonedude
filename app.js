@@ -7,7 +7,6 @@ const DOMSelectors = {
 
 async function apiCall(){
         const userInput = DOMSelectors.searchQuery.value
-        const unixTime = Date.now() / 1000
         const URL = `https://opensky-network.org/api/states/all?time=1706932554&icao24=${userInput}`
         const response = await fetch(URL,{
             mode: "cors"
